@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Transfer Money</title>
+</head>
+<body style="background-color:cyan">
+
+<center>
+<form action="transfer" method="post">
+    {% csrf_token %}
+    <div class="form-group row col-auto">
+        <label for="xx" class="col-md-2 col-form-label">Sender</label>
+        <div >
+        <input class="form-control-plaintext" id="xx" type="text" value={{get}} name="get" readonly>
+        </div>
+        </div>
+    <div class="form-group row col-auto">
+    <label class="col-md-2 col-form-label">Available balance</label>
+   <div >
+    {{getamt}}
+   </div></div>
+ <div class="form-group row col-auto">
+     <label for="x" class="col-sm-2 col-form-label"> Select a User to Transfer:</label>
+<div >
+<select name="rec" id="x" class="form-control">
+    {%for x in customers %}
+    {% if x.name != get %}
+    <option>{{x.name}}</option>
+    {% endif %}
+    {% endfor %}
+</select></div></div>
+    <div>
+         <div class="form-group row col-auto">
+        <label for="x" class="col-sm-2 col-form-label"> Amount</label>
+    <div>
+        <input type="number"  pattern="[0,9]" name="amt"> <br>
+
+    </div></div></div>
+ <input type="submit" class="btn btn-primary" value="transfer" >
+
+</form>
+    <br>
+     <form action="/" method="post">
+    {% csrf_token %}
+<input type="submit" class="btn btn-primary" value="Home" >
+</form>
+    <br>
+    <br>
+
+{% if messages %}
+<ul class="messages list-group">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }} list-group-item list-group-item-primary"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+    </center>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
